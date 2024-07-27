@@ -7,12 +7,21 @@ Este es un repositorio personal para ejecución del proyecto del curso **NextJs:
 El proyecto desarrollado a continuación explora los siguientes conceptos de NextJs:
 
 - Tailwind classes
+- Estructuras HTML con Tailwind
 - Estructura de un dashboard usando el app router
 - useState implementado en componente del lado del cliente usando la directiva `use-client`
 - Next Link
 - Next Image
 - Permitir imágenes externas modificando el objeto `nextConfig` desde `next.config.mjs`
 - Estructura básica de un proyecto usando `src`
+- Manejo de Metadata dinámica
+- Páginas generadas del lado del servidor - SSR
+- Páginas de errores
+- Página not found
+- Validación de argumentos
+- Redirecciones
+- Prioridad de Carga de imágenes
+- Tipos de revalidación con Fetch y sin Fetch
 
 ## Requerimientos
 
