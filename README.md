@@ -15,13 +15,15 @@ El proyecto desarrollado a continuación explora los siguientes conceptos de Nex
 - Permitir imágenes externas modificando el objeto `nextConfig` desde `next.config.mjs`
 - Estructura básica de un proyecto usando `src`
 - Manejo de Metadata dinámica
-- Páginas generadas del lado del servidor - SSR
+- Páginas generadas del lado del servidor - SSR (Server Side Rendering)
 - Páginas de errores
 - Página not found
 - Validación de argumentos
 - Redirecciones
 - Prioridad de Carga de imágenes
 - Tipos de revalidación con Fetch y sin Fetch
+- Generación de contenido estático en build time usando `generateStaticParams()` - SSG (Static Site Generation)
+- Generación de slugs dinámicos
 
 ## Requerimientos
 
