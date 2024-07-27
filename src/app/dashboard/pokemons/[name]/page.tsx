@@ -1,23 +1,29 @@
-import { Pokemon } from '@/pokemons';
+import { Pokemon, PokemonsResponse, SimplePokemon } from '@/pokemons';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
 interface Props {
-    params: { id: string; };
+    params: { name: string; };
 }
 
 // Se ejecuta en build time generando los estáticos
 export async function generateStaticParams () {
 
-    const staticPokemons = Array.from( { length: 151 } ).map( ( v, i ) => ( { id: `${ i + 1 }` } ) );
+    const pokemonsResponse: PokemonsResponse = await fetch( `https://pokeapi.co/api/v2/pokemon?limit=151` )
+        .then( response => response.json() );
+
+    const pokemonsParams = pokemonsResponse.results.map( ( pokemon ) => (
+        { name: pokemon.name }
+    ) );
+
     // Debe retornar los parámetros necesarios para la generación del estático
-    return staticPokemons;
+    return pokemonsParams;
 }
 
 export async function generateMetadata ( { params }: Props ): Promise<Metadata> {
     try {
-        const { name } = await getPokemon( params.id );
+        const { name } = await getPokemon( params.name );
 
         return {
             title: name,
@@ -31,9 +37,9 @@ export async function generateMetadata ( { params }: Props ): Promise<Metadata> 
     }
 }
 
-const getPokemon = async ( id: string ): Promise<Pokemon> => {
+const getPokemon = async ( name: string ): Promise<Pokemon> => {
     try {
-        const pokemon = await fetch( `https://pokeapi.co/api/v2/pokemon/${ id }`, {
+        const pokemon = await fetch( `https://pokeapi.co/api/v2/pokemon/${ name }`, {
             // cache: 'force-cache', // TODO: cambiar esto en un futuro
             next: {
                 revalidate: 60 * 60 * 30 * 6 // Se revalida cada 6 meses
@@ -49,7 +55,7 @@ const getPokemon = async ( id: string ): Promise<Pokemon> => {
 
 export default async function PokemonPage ( { params }: Props ) {
 
-    const pokemon = await getPokemon( params.id );
+    const pokemon = await getPokemon( params.name );
 
 
     return (
