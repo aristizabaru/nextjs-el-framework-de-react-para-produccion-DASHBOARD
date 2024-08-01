@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { IoBrowsersOutline, IoCalculator, IoFootball, IoLogoReact } from 'react-icons/io5';
-import { SidebarMenuItem } from './SidebarMenuItem';
+import { IoBrowsersOutline, IoCalculator, IoFootball, IoHeartOutline, IoLogoReact } from 'react-icons/io5';
+import { SidebarMenuItem } from '..';
 
 const menuItems = [
     {
@@ -21,6 +21,12 @@ const menuItems = [
         title: 'Pokemon',
         subTitle: 'Generación estática',
     },
+    {
+        path: '/dashboard/favorites',
+        icon: <IoHeartOutline size={ 20 } />,
+        title: 'Favoritos',
+        subTitle: 'Global State',
+    },
 ];
 
 export const Sidebar = () => {
@@ -38,20 +44,18 @@ export const Sidebar = () => {
             </div>
             <div id="profile" className="px-6 py-10">
                 <p className="text-slate-500 pb-2">Welcome back,</p>
-                <a href="#" className="inline-flex space-x-2 items-center">
-                    <span>
-                        <Image
-                            className="rounded-full w-8 h-8"
-                            src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c"
-                            alt="Avatar Image"
-                            width={ 50 }
-                            height={ 50 }
-                        />
-                    </span>
+                <span className="inline-flex space-x-2 items-center">
+                    <Image
+                        className="rounded-full w-8 h-8"
+                        src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c"
+                        alt="Avatar Image"
+                        width={ 50 }
+                        height={ 50 }
+                    />
                     <span className="text-sm md:text-base font-bold">
                         Andrés Aristizábal
                     </span>
-                </a>
+                </span>
             </div>
             <div id="nav" className="w-full px-6">
                 { menuItems.map( menuItem => (

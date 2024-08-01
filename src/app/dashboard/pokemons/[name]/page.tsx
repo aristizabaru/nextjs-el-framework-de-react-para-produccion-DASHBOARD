@@ -1,4 +1,4 @@
-import { Pokemon, PokemonsResponse, SimplePokemon } from '@/pokemons';
+import { Pokemon, PokemonsResponse } from '@/pokemons';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -53,10 +53,9 @@ const getPokemon = async ( name: string ): Promise<Pokemon> => {
     }
 };
 
-export default async function PokemonPage ( { params }: Props ) {
+export default async function PokemonPage ( { params }: Readonly<Props> ) {
 
     const pokemon = await getPokemon( params.name );
-
 
     return (
         <div className="flex mt-5 flex-col items-center text-slate-800">
@@ -73,8 +72,6 @@ export default async function PokemonPage ( { params }: Props ) {
                             alt={ `Imagen del pokemon ${ pokemon.name }` }
                             className="mb-5"
                         />
-
-
                         <div className="flex flex-wrap">
                             {
                                 pokemon.moves.map( move => (
@@ -96,7 +93,6 @@ export default async function PokemonPage ( { params }: Props ) {
                             }
                         </div>
                     </div>
-
                     <div className="flex flex-col items-start justify-center rounded-2xl bg-white bg-clip-border px-3 py-4  drop-shadow-lg ">
                         <p className="text-sm text-gray-600">Peso</p>
                         <span className="text-base font-medium text-navy-700 flex">
@@ -105,7 +101,6 @@ export default async function PokemonPage ( { params }: Props ) {
                             }
                         </span>
                     </div>
-
                     <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4  drop-shadow-lg">
                         <p className="text-sm text-gray-600">Regular Sprites</p>
                         <div className="flex justify-center">
@@ -116,40 +111,31 @@ export default async function PokemonPage ( { params }: Props ) {
                                 height={ 100 }
                                 alt={ `sprite ${ pokemon.name }` }
                             />
-
                             <Image
                                 src={ pokemon.sprites.back_default }
                                 width={ 100 }
                                 height={ 100 }
                                 alt={ `sprite ${ pokemon.name }` }
                             />
-
                         </div>
                     </div>
-
                     <div className="flex flex-col justify-center rounded-2xl bg-white bg-clip-border px-3 py-4  drop-shadow-lg">
                         <p className="text-sm text-gray-600">Shiny Sprites</p>
                         <div className="flex justify-center">
-
                             <Image
                                 src={ pokemon.sprites.front_shiny }
                                 width={ 100 }
                                 height={ 100 }
                                 alt={ `sprite ${ pokemon.name }` }
                             />
-
                             <Image
                                 src={ pokemon.sprites.back_shiny }
                                 width={ 100 }
                                 height={ 100 }
                                 alt={ `sprite ${ pokemon.name }` }
                             />
-
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
