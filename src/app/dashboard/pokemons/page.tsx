@@ -1,33 +1,41 @@
-import { SimplePokemon } from '../../../pokemons/interfaces/simple-pokemon';
-import { PokemonsResponse } from '../../../pokemons/interfaces/pokemons-response';
-import { PokemonGrid } from '../../../pokemons/components/PokemonGrid';
+import { PokemonGrid, PokemonsReponse, SimplePokemon } from "@/pokemons";
+
 
 export const metadata = {
-    title: 'Pokemons',
-    description: 'Listado de Pokemons',
+ title: '151 Pokémons',
+ description: 'Ad minim sit cupidatat culpa consectetur.',
 };
 
-const getPokemons = async ( limit = 20, offset = 0 ): Promise<SimplePokemon[]> => {
-    const pokemonsResponse: PokemonsResponse = await fetch( `https://pokeapi.co/api/v2/pokemon?limit=${ limit }&offset=${ offset }` )
-        .then( response => response.json() );
 
-    const pokemonsData = pokemonsResponse.results.map( ( pokemon ) => ( {
-        id: pokemon.url.split( '/' ).at( -2 )!,
-        name: pokemon.name
-    } ) );
+const getPokemons = async( limit = 20, offset= 0 ):Promise<SimplePokemon[]> => {
+  const data:PokemonsReponse = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${ offset }`)
+    .then( res => res.json() );
 
-    // throw new Error( 'No se pudieron cargar los pokemons' );
-    return pokemonsData;
-};
+    const pokemons = data.results.map( pokemon => ({
+      id: pokemon.url.split('/').at(-2)!,
+      name: pokemon.name,
+    }));
 
-export default async function PokemonsPage () {
+    // throw new Error('Esto es un error que no debería de suceder');
+    // throw notFound();
 
-    const pokemons = await getPokemons( 151 );
+    return pokemons;
+}
 
-    return (
-        <div className='flex flex-col'>
-            <span className='text-5xl my-4'>Listado de Pokemons <small className='text-blue-500'>estático</small></span>
-            <PokemonGrid pokemons={ pokemons } />
-        </div>
-    );
+
+
+
+export default async function PokemonsPage() {
+
+  const pokemons = await getPokemons(151);
+  
+  return (
+    <div className="flex flex-col">
+
+      <span className="text-5xl my-2">Listado de Pokémons <small className="text-blue-500">estático</small></span>
+      
+      <PokemonGrid pokemons={ pokemons } />
+
+    </div>
+  );
 }
