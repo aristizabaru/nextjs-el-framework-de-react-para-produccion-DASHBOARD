@@ -24,6 +24,7 @@ El proyecto desarrollado a continuación explora los siguientes conceptos de Nex
 - Tipos de revalidación con Fetch y sin Fetch
 - Generación de contenido estático en build time usando `generateStaticParams()` - SSG (Static Site Generation)
 - Generación de slugs dinámicos
+- Implementación de Redux
 
 ## Requerimientos
 
